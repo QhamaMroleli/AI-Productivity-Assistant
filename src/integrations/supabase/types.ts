@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ai_records: {
+        Row: {
+          created_at: string
+          id: string
+          input: Json
+          kind: string
+          output: Json
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          input?: Json
+          kind: string
+          output?: Json
+          title: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          input?: Json
+          kind?: string
+          output?: Json
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          completed: boolean
+          created_at: string
+          deadline: string | null
+          description: string | null
+          duration_minutes: number
+          id: string
+          priority: string
+          start_time: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          duration_minutes?: number
+          id?: string
+          priority?: string
+          start_time?: string | null
+          title: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          duration_minutes?: number
+          id?: string
+          priority?: string
+          start_time?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
