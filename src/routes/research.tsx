@@ -47,7 +47,7 @@ function ResearchPage() {
 
   async function submit() {
     if (loading) return;
-    if (topic.trim().length < 3) return setError("Enter a research topic or question.");
+    if (topic.trim().length < 3) { setError("Enter a research topic or question."); return; }
     setLoading(true);
     setError("");
     try {

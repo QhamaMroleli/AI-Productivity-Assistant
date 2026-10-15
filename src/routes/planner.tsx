@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { format, isPast } from "date-fns";
-import { CalendarClock, Loader2, Plus, Trash2, Pencil, Sparkles as _unused, Coffee, AlertTriangle, Flame, X } from "lucide-react";
+import { CalendarClock, Loader2, Plus, Trash2, Pencil, Coffee, AlertTriangle, Flame, X } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/app/AppShell";
 import { ConfirmButton, EmptyState, ErrorBox, LoadingBlock, PageHeader, ToolDisclaimer } from "@/components/app/shared";
@@ -20,7 +20,6 @@ import type { ScheduleResult } from "@/lib/prompts";
 import { errorMessage, saveRecord, type Task } from "@/lib/records";
 import { cn } from "@/lib/utils";
 
-void _unused;
 
 export const Route = createFileRoute("/planner")({
   head: () => ({
@@ -80,7 +79,7 @@ function PlannerPage() {
   async function saveTask(e: React.FormEvent) {
     e.preventDefault();
     const title = draft.title.trim();
-    if (!title) return toast.error("Task title is required");
+    if (!title) { toast.error("Task title is required"); return; }
     const duration = Math.min(1440, Math.max(5, parseInt(draft.duration) || 60));
     const row = {
       title: title.slice(0, 200),
@@ -95,7 +94,7 @@ function PlannerPage() {
       ? await supabase.from("tasks").update({ ...row, updated_at: new Date().toISOString() }).eq("id", editId)
       : await supabase.from("tasks").insert(row);
     setSaving(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(editId ? "Task updated" : "Task added");
     setDraft(EMPTY);
     setEditId(null);
@@ -104,20 +103,20 @@ function PlannerPage() {
 
   async function toggle(t: Task, completed: boolean) {
     const { error } = await supabase.from("tasks").update({ completed }).eq("id", t.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     invalidate("tasks");
   }
 
   async function remove(id: string) {
     const { error } = await supabase.from("tasks").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Task deleted");
     invalidate("tasks");
   }
 
   async function generate() {
     if (loading) return;
-    if (!open.length) return setError("Add at least one open task first.");
+    if (!open.length) { setError("Add at least one open task first."); return; }
     setLoading(true);
     setError("");
     try {

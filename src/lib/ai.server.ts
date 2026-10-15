@@ -43,7 +43,7 @@ export async function callAI(opts: {
   input: string | InputMessage[];
   schema?: { name: string; schema: Record<string, unknown> };
 }): Promise<string> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) throw new AIError(401, "AI is not configured: LOVABLE_API_KEY is missing on the server.");
 
   const body: Record<string, unknown> = {
@@ -56,7 +56,7 @@ export async function callAI(opts: {
     include: ["reasoning.encrypted_content"],
   };
   if (opts.schema) {
-    body.text = {
+    body['text'] = {
       format: { type: "json_schema", name: opts.schema.name, schema: opts.schema.schema, strict: true },
     };
   }

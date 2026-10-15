@@ -48,7 +48,7 @@ function MeetingsPage() {
 
   async function submit() {
     if (loading) return;
-    if (form.notes.trim().length < 20) return setError("Paste at least a few lines of meeting notes.");
+    if (form.notes.trim().length < 20) { setError("Paste at least a few lines of meeting notes."); return; }
     setLoading(true);
     setError("");
     try {

@@ -45,7 +45,7 @@ function Brand() {
   );
 }
 
-function NavList({ onNavigate }: { onNavigate?: () => void }) {
+function NavList({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
     <nav aria-label="Main" className="flex flex-col gap-1">
@@ -71,7 +71,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
+function SidebarBody({ onNavigate }: { onNavigate?: (() => void) | undefined }) {
   const { user } = useAuth();
   return (
     <div className="flex h-full flex-col gap-6 p-4">
