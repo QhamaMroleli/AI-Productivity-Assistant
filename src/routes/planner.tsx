@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { format, isPast } from "date-fns";
-import { CalendarClock, Loader2, Plus, Trash2, Pencil, Sparkles as _unused, Coffee, AlertTriangle, Flame, X } from "lucide-react";
+import { CalendarClock, Loader2, Plus, Trash2, Pencil, Coffee, AlertTriangle, Flame, X } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/app/AppShell";
 import { ConfirmButton, EmptyState, ErrorBox, LoadingBlock, PageHeader, ToolDisclaimer } from "@/components/app/shared";
@@ -20,7 +20,6 @@ import type { ScheduleResult } from "@/lib/prompts";
 import { errorMessage, saveRecord, type Task } from "@/lib/records";
 import { cn } from "@/lib/utils";
 
-void _unused;
 
 export const Route = createFileRoute("/planner")({
   head: () => ({
