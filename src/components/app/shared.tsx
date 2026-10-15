@@ -66,7 +66,7 @@ export function CopyButton({ text, label = "Copy" }: { text: string; label?: str
   );
 }
 
-export function ErrorBox({ message, onRetry }: { message: string; onRetry?: () => void }) {
+export function ErrorBox({ message, onRetry }: { message: string; onRetry?: (() => void) | undefined }) {
   return (
     <div role="alert" className="flex flex-col gap-3 rounded-lg border border-destructive/30 bg-destructive-soft p-4 text-sm sm:flex-row sm:items-center sm:justify-between">
       <div className="flex gap-2 text-destructive">

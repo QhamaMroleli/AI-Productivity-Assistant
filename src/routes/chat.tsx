@@ -57,7 +57,7 @@ function ChatPage() {
       const { text } = await reply({ data: { messages: history.slice(-40) } });
       const next = [...history, { role: "assistant" as const, content: text }];
       setMessages(next);
-      const title = history[0].content.slice(0, 80);
+      const title = (history[0]?.content ?? "Chat").slice(0, 80);
       if (recordId) await updateRecordOutput(recordId, { messages: next });
       else setRecordId(await saveRecord("chat", title, {}, { messages: next }));
       invalidate("records");

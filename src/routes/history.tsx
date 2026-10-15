@@ -29,7 +29,7 @@ export const Route = createFileRoute("/history")({
 });
 
 function recordText(r: AiRecord): string {
-  const o = (r.output ?? {}) as Record<string, unknown>;
+  const o = (r.output ?? {}) as { markdown?: unknown; subject?: unknown; body?: unknown; messages?: unknown; blocks?: unknown };
   if (typeof o.markdown === "string") return o.markdown;
   if (r.kind === "email") return `Subject: ${o.subject ?? ""}\n\n${o.body ?? ""}`;
   if (r.kind === "chat" && Array.isArray(o.messages))
@@ -48,7 +48,7 @@ function HistoryPage() {
 
   async function remove(id: string) {
     const { error } = await supabase.from("ai_records").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Deleted");
     invalidate("records");
   }

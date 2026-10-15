@@ -31,7 +31,7 @@ function SettingsPage() {
   async function wipe() {
     const a = await supabase.from("ai_records").delete().eq("user_id", user!.id);
     const b = await supabase.from("tasks").delete().eq("user_id", user!.id);
-    if (a.error || b.error) return toast.error((a.error ?? b.error)!.message);
+    if (a.error || b.error) { toast.error((a.error ?? b.error)!.message); return; }
     invalidate("records");
     invalidate("tasks");
     toast.success("All your saved data was deleted");
